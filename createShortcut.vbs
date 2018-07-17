@@ -1,9 +1,14 @@
-Set oWS = WScript.CreateObject("WScript.Shell")
-sLinkFile = ""
-Set oLink = oWS.CreateShortcut(sLinkFile)
-    oLink.TargetPath = "C:\emporio\ORCAMENT.exe"
- '  oLink.Arguments = ""
- '  oLink.IconLocation = ""
- '  oLink.WindowStyle = "1"   
- '  oLink.WorkingDirectory = "C:\emporio\"
-    oLink.Save
+
+Dim ws, link
+
+Set ws = WScript.CreateObject("WScript.Shell")
+Set fs = CreateObject("Scripting.FileSystemObject")
+
+pathDesktop = ws.SpecialFolders("Desktop")
+
+If (NOT fs.FileExists(pathDesktop & "\PINBALL.lnk")) Then
+    Set link = ws.CreateShortcut(pathDesktop & "\pinballAtalho.lnk")
+    link.TargetPath = "C:\Arquivos de programas\Windows NT\Pinball\PINBALL.EXE"
+    link.Save
+End If
+
